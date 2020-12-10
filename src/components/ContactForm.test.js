@@ -18,6 +18,17 @@ test('user can fill out and submit form', () => {
     const lastNameInput = screen.getByLabelText(/last name/i)
     const emailInput = screen.getByLabelText(/email/i)
     const messageInput = screen.getByLabelText(/message/i)
+    const button = screen.getByRole('button', {name: /submit/i})
+
+    //fill out form
+    userEvent.type(firstNameInput, 'Pet')
+    userEvent.type(lastNameInput, 'VS')
+    userEvent.type(emailInput, 'test@email.com')
+    userEvent.type(messageInput, 'this is an input')
+
+
+    //click the button
+    userEvent.click(button)
 
 })
 
