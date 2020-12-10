@@ -14,7 +14,10 @@ test('user can fill out and submit form', () => {
     render(<ContactForm />)
 
     //match for input fields
-    const firstNameInput = screen.getByLabelText
+    const firstNameInput = screen.getByLabelText(/first name/i)
+    const lastNameInput = screen.getByLabelText(/last name/i)
+    const emailInput = screen.getByLabelText(/email/i)
+    const messageInput = screen.getByLabelText(/message/i)
 
 })
 
