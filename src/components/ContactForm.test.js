@@ -2,34 +2,40 @@ import React from 'react';
 import { render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ContactForm from './ContactForm'
+import { act } from 'react-dom/test-utils'
 
-test('render contact form without errors', () => {
-    render(<ContactForm />)
-})
+// test('render contact form without errors', () => {
+//     render(<ContactForm />)
+// })
 
 
 
 test('user can fill out and submit form', () => {
-
-    render(<ContactForm />)
-
+        
+    act(() => { render(<ContactForm />)
     //match for input fields
     const firstNameInput = screen.getByLabelText(/first name/i)
     const lastNameInput = screen.getByLabelText(/last name/i)
     const emailInput = screen.getByLabelText(/email/i)
     const messageInput = screen.getByLabelText(/message/i)
-    const button = screen.getByRole('button', {name: /submit/i})
+    const button = screen.getByText(/submit/i)
 
     //fill out form
-    userEvent.type(firstNameInput, 'Pet')
+    userEvent.type(firstNameInput, 'Pete')
     userEvent.type(lastNameInput, 'VS')
     userEvent.type(emailInput, 'test@email.com')
-    userEvent.type(messageInput, 'this is an input')
+    userEvent.type(messageInput, 'this is an message')
 
 
     //click the button
-    userEvent.click(button)
+    
+    userEvent.click(button) 
 
+    })
+
+    //Asset new pre is on page
+
+    expect(screen.findByRole('pre'))
 })
 
 //Test first name field exists and can enter text
