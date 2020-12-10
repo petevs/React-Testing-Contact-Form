@@ -38,6 +38,60 @@ test('user can fill out and submit form', () => {
     expect(screen.findByRole('pre'))
 })
 
+test('form submits if message empty', () => {
+        
+    act(() => { render(<ContactForm />)
+    //match for input fields
+    const firstNameInput = screen.getByLabelText(/first name/i)
+    const lastNameInput = screen.getByLabelText(/last name/i)
+    const emailInput = screen.getByLabelText(/email/i)
+    const button = screen.getByText(/submit/i)
+
+    //fill out form
+    userEvent.type(firstNameInput, 'Pete')
+    userEvent.type(lastNameInput, 'VS')
+    userEvent.type(emailInput, 'test@email.com')
+
+
+    //click the button
+    
+    userEvent.click(button) 
+
+    })
+
+    //Asset new pre is on page
+
+    expect(screen.findByText(/pete/i))
+})
+
+
+test('form does not submit if not complete', () => {
+        
+    act(() => { render(<ContactForm />)
+    //match for input fields
+    const lastNameInput = screen.getByLabelText(/last name/i)
+    const emailInput = screen.getByLabelText(/email/i)
+    const messageInput = screen.getByLabelText(/message/i)
+    const button = screen.getByText(/submit/i)
+
+    //fill out form
+    userEvent.type(lastNameInput, 'VS')
+    userEvent.type(emailInput, 'test@email.com')
+    userEvent.type(messageInput, 'this is an message')
+
+
+    //click the button
+    
+    userEvent.click(button) 
+
+    })
+
+    //Asset new pre is on page
+
+    expect(screen.queryByRole('pre')).not.toBeInTheDocument()
+})
+
+
 //Test first name field exists and can enter text
 //Test last name field exists and can enter text
 //Test email field exists and can enter text
