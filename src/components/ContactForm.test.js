@@ -38,7 +38,7 @@ test('user can fill out and submit form', () => {
     expect(screen.findByRole('pre'))
 })
 
-test('form submits if message empty', () => {
+test('form submits if message empty but the rest is filled', () => {
         
     act(() => { render(<ContactForm />)
     //match for input fields
@@ -90,6 +90,28 @@ test('form does not submit if not complete', () => {
 
     expect(screen.queryByRole('pre')).not.toBeInTheDocument()
 })
+
+
+test('error message if first name is less than three', () => {
+        
+    act(() => { render(<ContactForm />)
+    //match for input fields
+    const firstNameInput = screen.getByLabelText(/first name/i)
+
+    //fill out form
+    userEvent.type(firstNameInput, 'pet')
+
+    //click the button
+    
+    // userEvent.click(button) 
+
+    })
+
+    //Asset new pre is on page
+
+    expect(screen.queryAllByText(/error/i))
+})
+
 
 
 //Test first name field exists and can enter text
